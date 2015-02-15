@@ -15,6 +15,7 @@
  */
 package com.github.pmerienne.trident.cf.benchmark;
 
+import com.github.pmerienne.trident.cf.builtin.PermanentSimilaritiesUpdateLauncher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -129,10 +130,11 @@ public class TridentCFPreferencesUpdateBenchmark {
 
 		RandomBinaryPreferencesSpout preferencesSpout = new RandomBinaryPreferencesSpout(batchSize, nbUsers, nbItems);
 		Stream preferenceStream = topology.newStream("preferences", preferencesSpout);
+        Stream updateSimilaritiesStream = topology.newStream(null, new PermanentSimilaritiesUpdateLauncher());
 
 		// Create collaborative filtering topology
 		TridentCollaborativeFilteringBuilder builder = new TridentCollaborativeFilteringBuilder();
-		builder.use(topology).with(options).process(preferenceStream).build();
+		builder.use(topology).with(options).process(preferenceStream).updateSimilaritiesOn(updateSimilaritiesStream).build();
 
 		// Submit and wait topology
 		cluster.submitTopology(TOPOLOGY_NAME, new Config(), topology.build());

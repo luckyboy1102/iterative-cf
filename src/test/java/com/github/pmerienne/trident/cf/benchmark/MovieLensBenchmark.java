@@ -84,7 +84,7 @@ public class MovieLensBenchmark {
 			Utils.sleep(200);
 		}
 		long elapsed = (System.currentTimeMillis() - previous) / 1000;
-		LOGGER.info("All preferences loaded in " + elapsed + "s");
+        System.out.println("All preferences loaded in " + elapsed + "s");
 
 		// Compute similarities
 		similaritiesUpdateTracker.activate();
@@ -92,6 +92,6 @@ public class MovieLensBenchmark {
 			Utils.sleep(200);
 		}
 		elapsed = similaritiesUpdateTracker.getElapsedSeconds();
-		LOGGER.info("Similarities computed in " + elapsed + "s");
+        System.out.println("Similarities computed in " + elapsed + "s");
 	}
 }

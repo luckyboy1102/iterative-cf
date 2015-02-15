@@ -27,7 +27,7 @@ import storm.trident.state.State;
 
 public abstract class AbstractRedisState implements State {
 
-	public final static String DEFAULT_HOST = "localhost";
+	public final static String DEFAULT_HOST = "192.168.184.100";
 	public final static int DEFAULT_PORT = 6379;
 
 	public static final String REDIS_HOST_CONF = "redis.port";
